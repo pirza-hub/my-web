@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIRZA.COM | Streetwear & Footwear</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-navy: #0B192C;
+            --accent-teal: #008B99;
+            --teal-light: #E0F7FA;
+            --bg-light: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            padding-bottom: 60px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 4%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .brand-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--primary-navy);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .brand-logo span {
+            color: var(--accent-teal);
+        }
+
+        .nav-pills {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            padding: 8px 14px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background: #FFFFFF;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-btn.active {
+            background: var(--primary-navy);
+            color: #FFFFFF;
+            border-color: var(--primary-navy);
+        }
+
+        .cart-badge {
+            background: var(--accent-teal);
+            color: #FFFFFF;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+        }
+
+        .hero-banner {
+            margin: 15px 4%;
+            background: linear-gradient(135deg, #E2F1F3 0%, #E0F7FA 100%);
+            border-radius: 20px;
+            padding: 25px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .hero-text h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-bottom: 15px;
+        }
+
+        .hero-btn {
+            padding: 10px 22px;
+            background: var(--primary-navy);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .filter-section {
+            padding: 10px 4% 15px;
+        }
+
+        .category-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .cat-chip {
+            padding: 8px 16px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 0.85rem;
+        }
+
+        .cat-chip.active {
+            background: var(--accent-teal);
+            color: #FFFFFF;
+            border-color: var(--accent-teal);
+        }
+
+        .search-box {
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 38px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background: #FFFFFF;
+            color: var(--text-main);
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .products-container {
+            padding: 10px 4% 40px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-navy);
+            font-weight: 700;
+        }
+
+        /* 2 PRODUCTS PER ROW GRID FOR MOBILE */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .product-img-wrapper {
+            position: relative;
+            height: 180px;
+            background: #F1F5F9;
+            width: 100%;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #FFFFFF;
+            color: var(--primary-navy);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 12px;
+            text-transform: capitalize;
+        }
+
+        .product-details {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            line-height: 1.2;
+            height: 2.4em;
+            overflow: hidden;
+        }
+
+        .product-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .current-price {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+        }
+
+        .old-price {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: auto;
+        }
+
+        .btn-add-cart {
+            padding: 8px 4px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: #FFFFFF;
+            color: var(--primary-navy);
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .btn-buy-now {
+            padding: 8px 4px;
+            border-radius: 10px;
+            border: none;
+            background: var(--accent-teal);
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        #productDetailPage {
+            display: none;
+            padding: 20px 4% 50px;
+        }
+
+        .back-nav-btn {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            color: var(--primary-navy);
+            padding: 8px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .daraz-details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            background: #FFFFFF;
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        @media(min-width: 768px) {
+            .daraz-details-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .daraz-img-container {
+            width: 100%;
+            height: 280px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #F1F5F9;
+        }
+
+        .daraz-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .daraz-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .daraz-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+            margin-bottom: 6px;
+        }
+
+        .daraz-cat {
+            color: var(--accent-teal);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .daraz-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+            margin-bottom: 12px;
+        }
+
+        .daraz-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(11, 25, 44, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-content {
+            background: #FFFFFF;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 450px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 22px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 15px;
+            background: #F1F5F9;
+            border: none;
+            color: var(--text-main);
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; font-size: 0.82rem; font-weight: 600; color: var(--text-main); }
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: #F8FAFC;
+            color: var(--text-main);
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .auth-tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .auth-tab-btn.active {
+            color: var(--accent-teal);
+            border-bottom: 3px solid var(--accent-teal);
+        }
+
+        footer {
+            background: var(--primary-navy);
+            color: #FFFFFF;
+            padding: 30px 4% 15px;
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--teal-light);
+        }
+
+        .footer-col p, .footer-col a {
+            color: #94A3B8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+            color: #64748B;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-logo" onclick="window.showMainHome()">
+            PIRZA<span>.COM</span>
+        </div>
+
+        <nav class="nav-pills">
+            <button class="nav-btn active" onclick="window.showMainHome()"><i class="fa-solid fa-house"></i> Home</button>
+            <button class="nav-btn" onclick="window.openCartModal()"><i class="fa-solid fa-cart-shopping"></i> Cart <span class="cart-badge" id="cartCount">0</span></button>
+            <button class="nav-btn" onclick="window.openAccountModal()"><i class="fa-solid fa-user"></i> Account</button>
+        </nav>
+    </header>
+
+    <div id="mainHomeView">
+        <section class="hero-banner">
+            <div class="hero-text">
+                <h1>Step Into Greatness</h1>
+                <p>Authentic Baggy Pants, Shoes & Sweaters.</p>
+                <button class="hero-btn" onclick="window.filterCategory('all', null)">Shop Collection</button>
+            </div>
+            <div style="font-size: 3.5rem; color: var(--accent-teal);">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+        </section>
+
+        <section class="filter-section">
+            <div class="category-scroll">
+                <button class="cat-chip active" onclick="window.filterCategory('all', this)">All Items</button>
+                <button class="cat-chip" onclick="window.filterCategory('baggy pants', this)">Baggy Pants</button>
+                <button class="cat-chip" onclick="window.filterCategory('shoes', this)">Shoes</button>
+                <button class="cat-chip" onclick="window.filterCategory('sweaters', this)">Sweaters</button>
+            </div>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Search products..." onkeyup="window.searchProducts()">
+            </div>
+        </section>
+
+        <section class="products-container">
+            <h2 class="section-title">Trending Products</h2>
+            <div class="product-grid" id="productGrid"></div>
+        </section>
+    </div>
+
+    <div id="productDetailPage">
+        <button class="back-nav-btn" onclick="window.showMainHome()"><i class="fa-solid fa-arrow-left"></i> Back to Store</button>
+        
+        <div class="daraz-details-grid">
+            <div class="daraz-img-container">
+                <img id="dImg" src="" alt="Product">
+            </div>
+            <div class="daraz-info">
+                <span class="daraz-cat" id="dCat">Category</span>
+                <h1 class="daraz-title" id="dTitle">Title</h1>
+                <div class="daraz-price" id="dPrice">Rs. 0</div>
+                <p class="daraz-desc" id="dDesc">Description...</p>
+                <div style="display: flex; gap: 10px; margin-top: auto;">
+                    <button class="btn-add-cart" id="dBtnCart" style="flex:1; padding:12px; font-size:0.88rem;"><i class="fa-solid fa-cart-plus"></i> Add To Cart</button>
+                    <button class="btn-buy-now" id="dBtnBuy" style="flex:1; padding:12px; font-size:0.88rem;">Buy Now</button>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Recommended Products</h2>
+        <div class="product-grid" id="relatedGrid"></div>
+    </div>
+
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="window.closeModal('cartModal')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="margin-bottom: 15px; color: var(--primary-navy);"><i class="fa-solid fa-cart-shopping"></i> Cart</h3>
+            <div id="cartItemsList"></div>
+            <div style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 700;">Total:</span>
+                <span id="cartTotal" style="font-size: 1.2rem; font-weight: 800; color: var(--primary-navy);">Rs. 0</span>
+            </div>
+            <button class="btn-buy-now" style="width: 100%; padding: 12px; margin-top: 15px; font-size: 0.9rem;" onclick="window.proceedCartCheckout()">Checkout</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="accountModal">
+        <div class="modal-content" style="max-width: 380px;">
+            <button class="close-modal" onclick="window.closeModal('accountModal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tabLogin" onclick="window.switchAuthTab('login')">Login</button>
+                <button class="auth-tab-btn" id="tabSignup" onclick="window.switchAuthTab('signup')">Sign Up</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Mobile Number / Email</label>
+                    <input type="text" class="form-control" required placeholder="03001234567">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" required placeholder="******">
+                </div>
+                <button type="submit" class="btn-buy-now" style="width: 100%; padding: 12px; margin-top: 10px; font-size: 0.9rem;">Login</button>
+            </form>
+            <form id="signupForm" style="display: none;">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" required placeholder="Aapka Naam">
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" class="form-control" required placeholder="03001234567">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" required placeholder="******">
+                </div>
+                <button type="submit" class="btn-buy-now" style="width: 100%; padding: 12px; margin-top: 10px; font-size: 0.9rem;">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="window.closeModal('checkoutModal')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="margin-bottom: 15px; color: var(--primary-navy);">Delivery Details</h3>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="custName" class="form-control" required placeholder="Full Name">
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp / Mobile *</label>
+                    <input type="tel" id="custPhone" class="form-control" required placeholder="03001234567">
+                </div>
+                <div class="form-group">
+                    <label>City *</label>
+                    <input type="text" id="custCity" class="form-control" required placeholder="City">
+                </div>
+                <div class="form-group">
+                    <label>Address *</label>
+                    <textarea id="custAddress" class="form-control" rows="3" required placeholder="Address"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="custPayment" class="form-control">
+                        <option value="Cash on Delivery">Cash on Delivery (COD)</option>
+                        <option value="JazzCash / EasyPaisa">JazzCash / EasyPaisa</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-buy-now" style="width: 100%; padding: 12px; margin-top: 10px; font-size: 0.9rem;">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>PIRZA.COM</h4>
+                <p>Authentic Baggy Pants, Shoes & Sweaters.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <a href="#" onclick="window.filterCategory('baggy pants', null)">Baggy Pants</a>
+                <a href="#" onclick="window.filterCategory('shoes', null)">Shoes</a>
+                <a href="#" onclick="window.filterCategory('sweaters', null)">Sweaters</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 PIRZA.COM. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * @typedef {Object} Product
+         * @property {string} id
+         * @property {string} name
+         * @property {string} category
+         * @property {number} price
+         * @property {number} [oldPrice]
+         * @property {string} image
+         * @property {string} [description]
+         */
+
+        /** @type {Product[]} */
+        const defaultProducts = [
+            {
+                id: "p1",
+                name: "Loose-Fit Cargo Baggy Pants",
+                category: "baggy pants",
+                price: 3499,
+                oldPrice: 4500,
+                image: "https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=600&q=80",
+                description: "Premium cotton heavy denim baggy pants."
+            },
+            {
+                id: "p2",
+                name: "Air Cushion Runner Shoes",
+                category: "shoes",
+                price: 4999,
+                oldPrice: 6500,
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
+                description: "Lightweight, breathable athletic running shoes."
+            },
+            {
+                id: "p3",
+                name: "Textured Knit Wool Sweater",
+                category: "sweaters",
+                price: 2999,
+                oldPrice: 3800,
+                image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=600&q=80",
+                description: "Cozy cable knit sweater for winter."
+            }
+        ];
+
+        /** @type {Product[]} */
+        let products = [];
+        /** @type {Product[]} */
+        let cart = [];
+        /** @type {Product | {name: string, price: number} | null} */
+        let checkoutItem = null;
+
+        function loadProducts() {
+            const stored = localStorage.getItem('pirza_products');
+            if(stored) {
+                products = JSON.parse(stored);
+            } else {
+                products = defaultProducts;
+                localStorage.setItem('pirza_products', JSON.stringify(defaultProducts));
+            }
+        }
+
+        /**
+         * @param {Product[]} [items]
+         */
+        function renderProducts(items) {
+            loadProducts();
+            const list = items || products;
+            const grid = document.getElementById('productGrid');
+            if(!grid) return;
+            grid.innerHTML = '';
+
+            if(!list || list.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 30px 0;">No items found.</p>`;
+                return;
+            }
+
+            list.forEach((p) => {
+                grid.innerHTML += `
+                    <div class="product-card">
+                        <div class="product-img-wrapper" onclick="window.openDarazProductView('${p.id}')">
+                            <span class="category-badge">${p.category}</span>
+                            <img src="${p.image}" class="product-img" alt="${p.name}">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-title" onclick="window.openDarazProductView('${p.id}')">${p.name}</div>
+                            <div class="product-price-row">
+                                <span class="current-price">Rs. ${p.price}</span>
+                                ${p.oldPrice ? `<span class="old-price">Rs. ${p.oldPrice}</span>` : ''}
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-add-cart" onclick="window.addToCart('${p.id}')">Add</button>
+                                <button class="btn-buy-now" onclick="window.triggerDirectBuy('${p.id}')">Buy</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        /**
+         * @param {string} id
+         */
+        function openDarazProductView(id) {
+            loadProducts();
+            const p = products.find((item) => item.id === id);
+            if(!p) return;
+
+            checkoutItem = p;
+            const homeView = document.getElementById('mainHomeView');
+            const detailPage = document.getElementById('productDetailPage');
+            if(homeView) homeView.style.display = 'none';
+            if(detailPage) detailPage.style.display = 'block';
+
+            const dImg = /** @type {HTMLImageElement} */ (document.getElementById('dImg'));
+            if(dImg) dImg.src = p.image;
+
+            const dTitle = document.getElementById('dTitle');
+            if(dTitle) dTitle.textContent = p.name;
+
+            const dCat = document.getElementById('dCat');
+            if(dCat) dCat.textContent = p.category;
+
+            const dPrice = document.getElementById('dPrice');
+            if(dPrice) dPrice.textContent = `Rs. ${p.price}`;
+
+            const dDesc = document.getElementById('dDesc');
+            if(dDesc) dDesc.textContent = p.description || "Details available.";
+
+            const dBtnCart = document.getElementById('dBtnCart');
+            if(dBtnCart) dBtnCart.onclick = function() { window.addToCart(p.id); };
+
+            const dBtnBuy = document.getElementById('dBtnBuy');
+            if(dBtnBuy) dBtnBuy.onclick = function() { window.triggerDirectBuy(p.id); };
+
+            const related = products.filter((item) => item.category === p.category && item.id !== p.id);
+            const relGrid = document.getElementById('relatedGrid');
+            if(relGrid) {
+                relGrid.innerHTML = '';
+                if(related.length === 0) {
+                    relGrid.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-muted);">No related items.</p>`;
+                } else {
+                    related.forEach((rp) => {
+                        relGrid.innerHTML += `
+                            <div class="product-card" onclick="window.openDarazProductView('${rp.id}')">
+                                <div class="product-img-wrapper">
+                                    <span class="category-badge">${rp.category}</span>
+                                    <img src="${rp.image}" class="product-img" alt="${rp.name}">
+                                </div>
+                                <div class="product-details">
+                                    <div class="product-title">${rp.name}</div>
+                                    <div class="product-price-row">
+                                        <span class="current-price">Rs. ${rp.price}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showMainHome() {
+            const detailPage = document.getElementById('productDetailPage');
+            const homeView = document.getElementById('mainHomeView');
+            if(detailPage) detailPage.style.display = 'none';
+            if(homeView) homeView.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderProducts();
+        }
+
+        /**
+         * @param {string} cat
+         * @param {HTMLElement | null} [element]
+         */
+        function filterCategory(cat, element) {
+            showMainHome();
+            if(element) {
+                document.querySelectorAll('.cat-chip').forEach((btn) => btn.classList.remove('active'));
+                element.classList.add('active');
+            }
+
+            loadProducts();
+            if(cat === 'all') renderProducts(products);
+            else renderProducts(products.filter((p) => p.category.toLowerCase() === cat.toLowerCase()));
+        }
+
+        function searchProducts() {
+            showMainHome();
+            loadProducts();
+            const input = /** @type {HTMLInputElement} */ (document.getElementById('searchInput'));
+            const q = input ? input.value.toLowerCase() : '';
+            renderProducts(products.filter((p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)));
+        }
+
+        /**
+         * @param {string} id
+         */
+        function addToCart(id) {
+            loadProducts();
+            const item = products.find((p) => p.id === id);
+            if(item) {
+                cart.push(item);
+                const badge = document.getElementById('cartCount');
+                if(badge) badge.textContent = String(cart.length);
+                alert(`Added to cart!`);
+            }
+        }
+
+        function openCartModal() {
+            const list = document.getElementById('cartItemsList');
+            if(!list) return;
+            list.innerHTML = '';
+            let total = 0;
+
+            if(cart.length === 0) {
+                list.innerHTML = `<p style="text-align: center; color: var(--text-muted); padding: 15px 0;">Cart is empty.</p>`;
+            } else {
+                cart.forEach((item, idx) => {
+                    total += Number(item.price);
+                    list.innerHTML += `
+                        <div class="cart-item-row">
+                            <div>
+                                <div style="font-weight: 700; color: var(--primary-navy);">${item.name}</div>
+                                <div style="color: var(--accent-teal); font-size: 0.85rem; font-weight: 700;">Rs. ${item.price}</div>
+                            </div>
+                            <button onclick="window.removeFromCart(${idx})" style="background: transparent; border: none; color: #EF4444; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                });
+            }
+
+            const cartTotal = document.getElementById('cartTotal');
+            if(cartTotal) cartTotal.textContent = `Rs. ${total}`;
+            const cartModal = document.getElementById('cartModal');
+            if(cartModal) cartModal.classList.add('active');
+        }
+
+        /**
+         * @param {number} index
+         */
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            const badge = document.getElementById('cartCount');
+            if(badge) badge.textContent = String(cart.length);
+            openCartModal();
+        }
+
+        function proceedCartCheckout() {
+            if(cart.length === 0) {
+                alert("Cart is empty!");
+                return;
+            }
+            checkoutItem = {
+                name: `Cart Checkout (${cart.length} items)`,
+                price: cart.reduce((s, i) => s + Number(i.price), 0)
+            };
+            closeModal('cartModal');
+            const checkoutModal = document.getElementById('checkoutModal');
+            if(checkoutModal) checkoutModal.classList.add('active');
+        }
+
+        /**
+         * @param {string} id
+         */
+        function triggerDirectBuy(id) {
+            loadProducts();
+            checkoutItem = products.find((p) => p.id === id) || null;
+            const checkoutModal = document.getElementById('checkoutModal');
+            if(checkoutModal) checkoutModal.classList.add('active');
+        }
+
+        function openAccountModal() {
+            const accModal = document.getElementById('accountModal');
+            if(accModal) accModal.classList.add('active');
+        }
+
+        /**
+         * @param {string} tab
+         */
+        function switchAuthTab(tab) {
+            const tabLogin = document.getElementById('tabLogin');
+            const tabSignup = document.getElementById('tabSignup');
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+
+            if(tab === 'login') {
+                if(tabLogin) tabLogin.classList.add('active');
+                if(tabSignup) tabSignup.classList.remove('active');
+                if(loginForm) loginForm.style.display = 'block';
+                if(signupForm) signupForm.style.display = 'none';
+            } else {
+                if(tabSignup) tabSignup.classList.add('active');
+                if(tabLogin) tabLogin.classList.remove('active');
+                if(signupForm) signupForm.style.display = 'block';
+                if(loginForm) loginForm.style.display = 'none';
+            }
+        }
+
+        /**
+         * @param {SubmitEvent} evt
+         * @param {string} type
+         */
+        function handleAuthSubmit(evt, type) {
+            evt.preventDefault();
+            alert(`${type} Successful!`);
+            closeModal('accountModal');
+        }
+
+        /**
+         * @param {SubmitEvent} evt
+         */
+        function handleOrderSubmit(evt) {
+            evt.preventDefault();
+            const nameEl = /** @type {HTMLInputElement} */ (document.getElementById('custName'));
+            const phoneEl = /** @type {HTMLInputElement} */ (document.getElementById('custPhone'));
+            const cityEl = /** @type {HTMLInputElement} */ (document.getElementById('custCity'));
+            const addrEl = /** @type {HTMLInputElement} */ (document.getElementById('custAddress'));
+            const payEl = /** @type {HTMLSelectElement} */ (document.getElementById('custPayment'));
+
+            const orderData = {
+                orderId: "PZ-" + Math.floor(100000 + Math.random() * 900000),
+                customerName: nameEl ? nameEl.value : '',
+                phone: phoneEl ? phoneEl.value : '',
+                city: cityEl ? cityEl.value : '',
+                address: addrEl ? addrEl.value : '',
+                payment: payEl ? payEl.value : '',
+                product: checkoutItem ? checkoutItem.name : "Direct Order",
+                amount: checkoutItem ? checkoutItem.price : 0,
+                status: "Pending",
+                date: new Date().toLocaleDateString()
+            };
+
+            let orders = JSON.parse(localStorage.getItem('pirza_orders') || "[]");
+            orders.unshift(orderData);
+            localStorage.setItem('pirza_orders', JSON.stringify(orders));
+
+            alert(`Order Placed Successfully!\nID: ${orderData.orderId}`);
+            closeModal('checkoutModal');
+            const form = /** @type {HTMLFormElement} */ (document.getElementById('checkoutForm'));
+            if(form) form.reset();
+            cart = [];
+            const badge = document.getElementById('cartCount');
+            if(badge) badge.textContent = '0';
+        }
+
+        /**
+         * @param {string} modalId
+         */
+        function closeModal(modalId) {
+            const m = document.getElementById(modalId);
+            if(m) m.classList.remove('active');
+        }
+
+        const loginFormEl = document.getElementById('loginForm');
+        if(loginFormEl) loginFormEl.addEventListener('submit', (e) => handleAuthSubmit(e, 'Login'));
+
+        const signupFormEl = document.getElementById('signupForm');
+        if(signupFormEl) signupFormEl.addEventListener('submit', (e) => handleAuthSubmit(e, 'Sign Up'));
+
+        const checkoutFormEl = document.getElementById('checkoutForm');
+        if(checkoutFormEl) checkoutFormEl.addEventListener('submit', (e) => handleOrderSubmit(e));
+
+        window.openDarazProductView = openDarazProductView;
+        window.showMainHome = showMainHome;
+        window.filterCategory = filterCategory;
+        window.searchProducts = searchProducts;
+        window.addToCart = addToCart;
+        window.openCartModal = openCartModal;
+        window.removeFromCart = removeFromCart;
+        window.proceedCartCheckout = proceedCartCheckout;
+        window.triggerDirectBuy = triggerDirectBuy;
+        window.openAccountModal = openAccountModal;
+        window.switchAuthTab = switchAuthTab;
+        window.closeModal = closeModal;
+
+        renderProducts();
+    </script>
+</body>
+</html>
